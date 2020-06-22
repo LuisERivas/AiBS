@@ -6,9 +6,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
+ // NavLink,
   Container
 } from 'reactstrap'
+import RegisterModal from './auth/RegisterModal'
+import Logout from './auth/Logout'
 
 class AppNavbar extends Component {
     state = {
@@ -31,7 +33,11 @@ class AppNavbar extends Component {
               <Nav className='ml-auto' navbar>
 
               <NavItem>
-                <NavLink href='barf.com'> barfff</NavLink>
+                <RegisterModal />
+              
+              </NavItem>
+              <NavItem>
+                <Logout />
               
               </NavItem>
               </Nav>
