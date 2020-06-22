@@ -20,6 +20,11 @@ class ShoppingList extends Component {
   //     ]
   // }
   // render
+  static propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool
+  }
   componentDidMount () {
     this.props.getItems()
   }
@@ -47,7 +52,7 @@ class ShoppingList extends Component {
         <ListGroup>
           {items.map(({ _id, name }) => (
             <ListGroupItem>
-              <Button
+              { this.props.isAuthenticated ? <Button
                 className=''
                 color='danger'
                 size='sm'
@@ -55,6 +60,9 @@ class ShoppingList extends Component {
               >
                                         &times;
               </Button>
+            : null  
+            }
+              
               {name}
             </ListGroupItem>
           ))}
@@ -64,13 +72,11 @@ class ShoppingList extends Component {
   }
   // return
 }
-ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
-}
+
 
 const mapStateToProps = (state) => ({
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList)
